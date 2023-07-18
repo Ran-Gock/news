@@ -1,0 +1,227 @@
+$primary_color: #07c;
+$secondary_color: rgb(170, 245, 245);
+
+@mixin animation($dur: 0, $del: 0, $tX: 0, $tY: 0, $rot: 0, $sX: 100%, $sY: 100%, $opacity: 0) {
+    opacity: $opacity;
+    transform: translate($tX, $tY) rotate($rot) scale($sX, $sY);
+    transition: all $dur ease $del;
+
+    &.element-show {
+        opacity: 1;
+        transform: translate(0, 0) rotate(0) scale(100%, 100%);
+    }
+    &.element-hide-fast{
+        transform: translate($tX, $tY) rotate($rot) scale($sX, $sY);
+        transition: all 100ms ease;
+    }
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100%;
+    background-color: $secondary_color;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    text-decoration-line: none;
+    text-decoration-thickness: 0.13em;
+    text-underline-offset: -0.1em;
+    transition: 100ms linear;
+}
+a:hover {
+    text-decoration-line: underline;
+    text-underline-offset: 0.2em;
+}
+
+header {
+    background-color: $primary_color;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+
+    img {
+        width: 50px;
+        height: 50px;
+        margin-left: 20px;
+    }
+    h1 {
+        margin: 0;
+        flex: 5;
+    }
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    z-index: 50;
+    height: 100%;
+}
+
+main {
+    display: flex;
+    margin: 0 20px 20px 0;
+    flex: 1 0 auto;
+}
+
+.news {
+    flex: 3;
+    margin-right: 20px;
+
+    h2 {
+        text-decoration: underline;
+        padding: 20px 0 20px 20px;
+        position: -webkit-sticky;
+        position: sticky;
+        margin: 0;
+        z-index: 50;
+        background-color: $secondary_color;
+        @include animation(400ms, 0s, -50%, 0, 0, 100%, 100%, 1);
+    }
+}
+
+.news-article {
+    margin: 0 0 20px 20px;
+    display: flex;
+
+    h3 {
+        margin: 0 0 10px;
+    }
+    a {
+        display: inline-block;
+        background-color: $primary_color;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+}
+
+.news-article-text {
+    z-index: 0;
+    @include animation(400ms, 400ms, -60%, 0, 0, 0);
+}
+
+.news-article-img {
+    z-index: 1;
+    display: block;
+    height: 150px;
+    margin-right: 20px;
+    border: 4px dashed $primary_color;
+    border-radius: 7px;
+    align-self: center;
+    @include animation(400ms, 0s, -40%);
+}
+
+@media screen and (max-width: 640px) {
+    .pop-categ {
+        display: none;
+    }
+
+    .header-nav-list {
+        display: none;
+        width: 0;
+    }
+
+    .nav-icon {
+        display: block;
+        width: 40px;
+        height: 40px;
+        margin-right: 20px;
+    }
+}
+
+@media screen and (min-width: 640px) {
+    header nav {
+        flex: 1;
+        display: flex;
+        margin-right: 20px;
+    }
+
+    .header-nav-list {
+        display: flex;
+        padding: 0;
+        list-style: none;
+
+        li { margin: 0 10px; }
+        a { color: #fff; }
+    }
+
+    .nav-icon {
+        display: none;
+    }
+
+    .pop-categ {
+        flex: 1;
+        height: fit-content;
+        position: sticky;
+
+        h2 {
+            padding: 0 0 10px 40px;
+            margin-top: 10px;
+        }
+    }
+
+    .pop-categ-list {
+        margin: 0;
+        list-style: none;
+        li {
+            margin: 20px 0;
+            a {
+                font-size: 1.3em;
+                color: #333;
+            }
+        }
+    }
+}
+
+footer {
+    background-color: $primary_color;
+    flex: 0 0 auto;
+    width: 100%;
+
+    // @include animation(400ms, 0s, 0, 0, 0, 100%, 1%);
+    nav {
+        display: flex;
+    }
+}
+
+.footer-nav-hor-list {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    flex-wrap: wrap;
+
+    li {
+        margin: 5px 15px;
+    }
+}
+
+.footer-nav-ver-list
+    {
+    margin: 30px;
+    padding: 0;
+    list-style: none;
+
+    li {
+        margin: 10px 0px;
+        a {
+            color: #fff;
+        }
+    }
+    h3 {
+        color: #fff;
+        text-decoration: underline;
+    }
+}
